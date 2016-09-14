@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "GLOBAL">
+         <PersistentStrings>
+            <PersistentString
+               value = "((XCUIElementQuery *)((XCUIElement *)[tablesQuery.cells elementBoundByIndex:13]).staticTexts[@&quot;New Items&quot;])">
+            </PersistentString>
+            <PersistentString
+               value = "((XCUIElementQuery *)((XCUIElement *)[tablesQuery.cells elementBoundByIndex:13]).staticTexts[@&quot;New Items&quot;]).buttons[@&quot;Selected&quot;].element">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[MultiSelectTableViewUITests testAddAndRemove]:MultiSelectTableViewUITests.m">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
