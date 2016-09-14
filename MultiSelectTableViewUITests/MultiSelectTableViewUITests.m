@@ -33,6 +33,8 @@
 - (void)tearDown {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
+    [self.app terminate];
+    _app = nil;
 }
 
 - (void)testDeleteAll {
@@ -42,7 +44,7 @@
     [self.app.sheets[@"Are you sure you want to remove these items?"].buttons[@"OK"] tap];
     
     //check if total number of items in table after 'Delete All' is 0
-    [self testEmptyTable];
+    [self isEmptyTable];
     
     //check is item is disabled
     [self testDisabledElement:masterNavigationBar.buttons[@"Edit"]];
@@ -53,12 +55,12 @@
     XCTAssertEqual(element.isEnabled, false, @"Expected Result: False \n Element should be disabled");
 }
 
-- (void)testEmptyTable {
+- (void)isEmptyTable {
     // check if the table is empty
     XCTAssertEqual(self.app.tables.cells.count, 0, @"Expected Result: 0");
 }
 
-- (void)testAddAndRemove {
+- (void)testAddAndRemoveItems {
     XCUIElement *masterNavigationBar = self.app.navigationBars[@"Master"];
     XCUIElement *editButton = masterNavigationBar.buttons[@"Edit"];
     XCUIElement *addButton = masterNavigationBar.buttons[@"Add"];
@@ -116,10 +118,9 @@
     [deleteButton tap];
     [okButton tap];
     
+    // get total number of items in table after removing 2 items
     orginalTotalRecords = currentTotalRecords;
     currentTotalRecords = self.app.tables.cells.count;
-    
-    // get total number of items in table after removing 2 items
     [self testDifferenceInItemsForTableWith:orginalTotalRecords afterEditsCount:currentTotalRecords matchesExpectedCount:2];
 }
 
