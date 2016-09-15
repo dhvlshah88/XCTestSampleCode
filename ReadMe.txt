@@ -37,7 +37,7 @@ compareStrings:expectedString: - function fails if two strings are not equal.
 
 Now, as for the test cases. 
 
-<b>Problem 1:</b>
+Problem 1:
 The first test case defines a scenario when the app launches and user presses Edit button. The table goes into the editing mode and navigation bar presents user with Delete All button.
 When user presses that button and confirmation message is shown. After confirming, all the items in table are deleted. Inorder to test if all the items were deleted, in test case "testDeleteAll" I wrote a check
 to see if total number of cells in table is equal to zero. After the test is passed, I wrote second assert to checks if the Edit button is disabled by checking XCUIElement's isEnabled property.
