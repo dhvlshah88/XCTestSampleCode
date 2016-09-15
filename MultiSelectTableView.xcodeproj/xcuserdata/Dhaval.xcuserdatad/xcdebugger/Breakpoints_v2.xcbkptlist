@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MultiSelectTableViewUITests/MultiSelectTableViewUITests.m"
-            timestampString = "495589719.99316"
+            timestampString = "495591256.625188"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "129"
-            endingLineNumber = "129"
-            landmarkName = "-testDifferenceInItemsForTableWith:afterEditsCount:matchesExpectedCount:"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "-testDeleteAll"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

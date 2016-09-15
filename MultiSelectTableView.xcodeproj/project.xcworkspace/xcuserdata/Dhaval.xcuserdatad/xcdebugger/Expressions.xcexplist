@@ -3,18 +3,12 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "GLOBAL">
+         contextName = "-[MultiSelectTableViewUITests testDeleteAll]:MultiSelectTableViewUITests.m">
          <PersistentStrings>
             <PersistentString
-               value = "((XCUIElementQuery *)((XCUIElement *)[tablesQuery.cells elementBoundByIndex:13]).staticTexts[@&quot;New Items&quot;])">
-            </PersistentString>
-            <PersistentString
-               value = "((XCUIElementQuery *)((XCUIElement *)[tablesQuery.cells elementBoundByIndex:13]).staticTexts[@&quot;New Items&quot;]).buttons[@&quot;Selected&quot;].element">
+               value = "self.app.tables.element">
             </PersistentString>
          </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[MultiSelectTableViewUITests testAddAndRemove]:MultiSelectTableViewUITests.m">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

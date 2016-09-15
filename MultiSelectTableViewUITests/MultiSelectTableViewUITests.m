@@ -27,7 +27,6 @@
     _app = [[XCUIApplication alloc] init];
     [self.app launch];
     
-    // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
 }
 
 - (void)tearDown {
@@ -78,7 +77,7 @@
     NSUInteger currentTotalRecords = self.app.tables.cells.count;
     
     //check to see if three new items were added
-    [self testDifferenceInItemsForTableWith:orginalTotalRecords afterEditsCount:currentTotalRecords matchesExpectedCount:3];
+    [self differenceInItemsForTableWith:orginalTotalRecords afterEditsCount:currentTotalRecords matchesExpectedCount:3];
     
     [editButton tap];
     
@@ -86,63 +85,67 @@
     [[[tablesQuery childrenMatchingType:XCUIElementTypeCell] elementBoundByIndex:5] swipeUp];
     
     //check if the cell exists before selecting
-    [self testElementExists:[[tablesQuery childrenMatchingType:XCUIElementTypeCell] elementBoundByIndex:1]];
+    [self doesElementExists:[[tablesQuery childrenMatchingType:XCUIElementTypeCell] elementBoundByIndex:1]];
     
     XCUIElement *cell13 = [[tablesQuery childrenMatchingType:XCUIElementTypeCell] elementBoundByIndex:13];
-    [self testElementExists:cell13];
+    [self doesElementExists:cell13];
     
     [cell13.staticTexts[@"New Item"] tap];
     
     //check if the cell is actually selected
-    [self testIsCellSelected:cell13 expectedResult:true];
+    [self isCellSelected:cell13 expectedResult:true];
     
     //check if the cell exists before selecting
     XCUIElement *cell14 = [[tablesQuery childrenMatchingType:XCUIElementTypeCell] elementBoundByIndex:14];
-    [self testElementExists:cell14];
+    [self doesElementExists:cell14];
     
     [cell14.staticTexts[@"New Item"] tap];
     
     //check if the cell is actually selected
-    [self testIsCellSelected:cell14 expectedResult:true];
+    [self isCellSelected:cell14 expectedResult:true];
     
     //check if the cell is actually selected
-    [self testIsCellSelected:(XCUIElement *)[[tablesQuery childrenMatchingType:XCUIElementTypeCell] elementBoundByIndex:12] expectedResult:false];
+    [self isCellSelected:(XCUIElement *)[[tablesQuery childrenMatchingType:XCUIElementTypeCell] elementBoundByIndex:12] expectedResult:false];
     
     NSString *expectedDeleteText = @"Delete (2)";
     XCUIElement *deleteButton = masterNavigationBar.buttons[expectedDeleteText];
     
     //check if two items were selected, so Delete (2) button exists.
-    [self testElementExists:deleteButton];
+    [self doesElementExists:deleteButton];
     
-    XCTAssertTrue([deleteButton.label isEqualToString:expectedDeleteText], @"Expected Result: button text %@ should be same as %@", deleteButton.label, expectedDeleteText);
+    [self compareStrings:deleteButton.label expectedString:expectedDeleteText];
     [deleteButton tap];
     [okButton tap];
     
     // get total number of items in table after removing 2 items
     orginalTotalRecords = currentTotalRecords;
     currentTotalRecords = self.app.tables.cells.count;
-    [self testDifferenceInItemsForTableWith:orginalTotalRecords afterEditsCount:currentTotalRecords matchesExpectedCount:2];
+    [self differenceInItemsForTableWith:orginalTotalRecords afterEditsCount:currentTotalRecords matchesExpectedCount:2];
 }
 
-- (void)testDifferenceInItemsForTableWith:(NSUInteger)originalCount afterEditsCount:(NSUInteger)afterEditsCount matchesExpectedCount:(NSUInteger)expectedCount {
+- (void)differenceInItemsForTableWith:(NSUInteger)originalCount afterEditsCount:(NSUInteger)afterEditsCount matchesExpectedCount:(NSUInteger)expectedCount {
     NSInteger diff = originalCount - afterEditsCount;
     XCTAssertEqual(ABS(diff), expectedCount, @"Expected Result: %lu", expectedCount);
 }
 
-- (void)testElementExists:(XCUIElement *)element {
+- (void)doesElementExists:(XCUIElement *)element {
     XCTAssert(element.exists, @"Expected Result: True");
 }
 
-- (void)testCellSelectedAt:(NSUInteger)index {
+- (void)cellSelectedAt:(NSUInteger)index {
     XCUIElement *cell = [[self.app.tables childrenMatchingType:XCUIElementTypeCell] elementBoundByIndex:index];
-    [self testIsCellSelected:cell expectedResult:true];
+    [self isCellSelected:cell expectedResult:true];
 }
 
-- (void)testIsCellSelected:(XCUIElement *)cell expectedResult:(Boolean)result {
+- (void)isCellSelected:(XCUIElement *)cell expectedResult:(Boolean)result {
     if (result)
         XCTAssertTrue(cell.isSelected, @"Expected Result: True");
     else
         XCTAssertFalse(cell.isSelected, @"Expected Result: False");
+}
+
+- (void)compareStrings:(NSString *)actualString expectedString:(NSString *)expectedString {
+     XCTAssertTrue([actualString isEqualToString:expectedString], @"Expected Result: %@, %@ should be same.", actualString, expectedString);
 }
 
 @end

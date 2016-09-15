@@ -20,7 +20,8 @@ Here I have tried to show you two test cases:
 
 1 Open project in Xcode.
 2 Select Test option from Run button (play button)
-3 And test it.
+3 Run it and see all UI test cases executing visually in simulator.
 
 (Note: As you debug/test the project you would see that first and second test case run successfully.)
 
+Also you would see that I have tried to separate some of the code blocks so it can be used again and also makes my code more readable.
